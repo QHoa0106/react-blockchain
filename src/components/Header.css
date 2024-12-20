@@ -1,0 +1,53 @@
+/* Header.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1a202c; /* Màu nền tối */
+  color: white;
+}
+
+header .flex {
+  display: flex;
+}
+
+header .space-x-4 {
+  margin-right: 1rem;
+}
+
+nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+a {
+  transition: background-color 0.3s ease;
+}
+nav a:hover {
+  color: #cbd5e0; /* Màu text khi hover */
+}
+.logo {
+  max-height: 30px; /* Điều chỉnh chiều cao logo */
+  width: auto;
+  object-fit: contain;
+}
+
+select,
+input {
+  background-color: #2d3748; /* Màu nền input */
+  color: #cbd5e0; /* Màu text input */
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+}
+
+button {
+  background-color: transparent;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+}

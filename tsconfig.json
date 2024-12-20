@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+      "target": "es5", // Mục tiêu phiên bản JavaScript (ES5 để hỗ trợ trình duyệt cũ hơn)
+      "lib": ["dom", "dom.iterable", "esnext"], // Các thư viện sử dụng
+      "allowJs": true, // Cho phép sử dụng file JavaScript
+      "skipLibCheck": true, // Bỏ qua kiểm tra kiểu trong file thư viện
+      "strict": true, // Bật chế độ kiểm tra chặt chẽ
+      "forceConsistentCasingInFileNames": true, // Kiểm tra phân biệt chữ hoa/thường
+      "noEmit": true, // Không tạo file output (chỉ kiểm tra TypeScript)
+      "esModuleInterop": true, // Hỗ trợ import kiểu ES module
+      "module": "esnext", // Hệ thống module sử dụng
+      "moduleResolution": "node", // Phương thức giải quyết module
+      "resolveJsonModule": true, // Cho phép import file JSON
+      "isolatedModules": true, // Hỗ trợ kiểm tra file module đơn lẻ
+      "jsx": "react-jsx", // Cấu hình JSX phù hợp với React 17+
+      "baseUrl": "./src", // Đặt thư mục gốc để giải quyết đường dẫn tương đối
+      "paths": {
+        "@components/*": ["components/*"], // Alias cho thư mục components
+        "@utils/*": ["utils/*"] // Alias cho thư mục utils
+      }
+    },
+    "include": ["src"], // Chỉ định các tệp hoặc thư mục cần kiểm tra
+    "exclude": ["node_modules", "build"] // Loại trừ các thư mục không cần thiết
+  }
+  
