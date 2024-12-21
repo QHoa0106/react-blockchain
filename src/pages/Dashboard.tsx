@@ -12,6 +12,7 @@ import {
   AreaChart,
   Area,
 } from "recharts";
+import axios from "axios";
 
 interface ChartData {
   date: string;
@@ -26,40 +27,39 @@ const Dashboard: React.FC = () => {
   );
 
   useEffect(() => {
-    const fetchDataFromURL = async () => {
-      try {
-        const response = await fetch("/chart1.json");
-        const data = await response.json();
+    // Lấy dữ liệu biểu đồ từ CoinGecko API
+    const fetchData = async () => {
+      const res = await axios.get(
+        "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=7"
+      );
+      const data = res.data;
 
-        const chartLabels = data.map((item: { timestamp: number }) => {
-          const date = new Date(item.timestamp);
-          return `${date.getHours()}:${date.getMinutes()}`;
-        });
+      const chartLabels = data.prices.map((price: [number, number]) => {
+        const date = new Date(price[0]);
+        return `${date.getHours()}:${date.getMinutes()}`;
+      });
 
-        const tvlValues = data.map((item: { TVL: number }) => item.TVL);
-        const volumeValues = data.map(
-          (item: { Volume: number }) => item.Volume
-        );
+      const tvlValues = data.prices.map((price: [number, number]) => price[1]);
+      const volumeValues = data.total_volumes.map(
+        (volume: [number, number]) => volume[1]
+      );
 
-        setChartDataTVL(
-          tvlValues.map((value: number, index: number) => ({
-            date: chartLabels[index],
-            TVL: value,
-          }))
-        );
+      setChartDataTVL(
+        tvlValues.map((value: number, index: number) => ({
+          date: chartLabels[index],
+          TVL: value,
+        }))
+      );
 
-        setChartDataVolume(
-          volumeValues.map((value: number, index: number) => ({
-            date: chartLabels[index],
-            Volume: value,
-          }))
-        );
-      } catch (error) {
-        console.error("Error fetching data from URL:", error);
-      }
+      setChartDataVolume(
+        volumeValues.map((value: number, index: number) => ({
+          date: chartLabels[index],
+          Volume: value,
+        }))
+      );
     };
 
-    fetchDataFromURL();
+    fetchData();
   }, []);
 
   return (
